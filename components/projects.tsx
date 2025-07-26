@@ -10,7 +10,7 @@ import Image from 'next/image'
 export default function Projects() {
   return (
     <section id='projects' className='py-20 relative overflow-hidden  bg-gray-900'>
-      <div className='max-w-7xl mx-auto px-6'>
+      <div className='max-w-7xl mx-auto  px-4 sm:px-6 lg:px-8'>
            {/* Section Heading */}
            <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -20,7 +20,7 @@ export default function Projects() {
            <SectionHeading>My Projects</SectionHeading>
            </motion.div>
               
-        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3
+        <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 md:grid-cols-2 
             gap-10 relative z-10 items-center justify-center '>
             {projectData.map((project, i)=>{
                 return <motion.div 
@@ -53,7 +53,7 @@ export default function Projects() {
               </p>
 
               <div className='flex items-center justify-between mt-5 mb-2'>
-                <div className='flex items-center'>
+                <div className='flex flex-wrap items-center'>
                   {project.iconLists.map((icon, index)=>(
                     <div key={index} className='border border-white/[.2] rounded-full
                      `bg-tertiary lg:w-10 lg:h-10 w-8 h-8 flex justify-center items-center'
