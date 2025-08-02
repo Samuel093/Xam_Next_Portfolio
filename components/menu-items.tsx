@@ -20,6 +20,7 @@ const MenuItem = ({children, index, href}:
         delay: index * 0.1,
         duration: 0.3,
         ease: easeOut}}
+        viewport={{once: true}}
     className='relative overflow-hidden px-2 py-1'
     >
 

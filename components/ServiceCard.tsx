@@ -21,6 +21,7 @@ const ServiceCard = ({ service }: Props) => {
       transition={{ duration: 0.8 }}
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.9 }}
+      viewport={{once: true}}
     >
       <Tilt className="shadow-2xl p-6 rounded-lg  bg-zinc-800">
         <img src={service.icon} alt={service.title} width={40} height={40} />

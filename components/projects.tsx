@@ -16,6 +16,7 @@ export default function Projects() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.5 }}
+            viewport={{once:true}}
             className='mb-10'>
            <SectionHeading>My Projects</SectionHeading>
            </motion.div>

@@ -11,6 +11,7 @@ const Services = () => {
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.5 }}
+        viewport={{once: true}}
         className="mb-10"
       >
         <SectionHeading>Services</SectionHeading>
@@ -26,6 +27,7 @@ const Services = () => {
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: i * 0.1 }}
+              viewport={{once: true}}
               key={service.id}
             >
               {/* {Services Card} */}
