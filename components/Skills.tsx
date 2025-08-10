@@ -20,7 +20,7 @@ const Skills = () => {
       <div className="max-w-7xl mt-20 mx-auto px-6">
         <div
           className="mt-20 w-[80%] mx-auto grid grid-cols-1 sm:grid-cols-2
-         md:grid-cols-3 lg-grid-cols-4 xl:grid-cols-5 gap-6  items-center"
+         md:grid-cols-3 lg-grid-cols-4 xl:grid-cols-5 gap-8  items-center"
         >
           {skillsData.map((skill, i) => {
             return (

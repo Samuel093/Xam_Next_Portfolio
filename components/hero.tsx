@@ -11,8 +11,8 @@ export default function Hero() {
     return (
         <section className="min-h-screen relative overflow-hidden bg-black">
             <ParticleCanvas/>
-            <div className="max-w-7xl mx-auto px-6 pt-32">
-                <div className="flex flex-col lg:flex-row items-center gap-16">
+            <div className="max-w-7xl mx-auto  px-6 pt-32">
+                <div className="flex flex-col lg:flex-row items-center gap-12">
                     {/* Text content */}
                     <motion.div
                         initial={{ opacity: 0, x: -50 }}

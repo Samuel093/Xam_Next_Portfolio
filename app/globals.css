@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+
+
+html, body {
+  overflow-x: hidden;
+}
+
 /* Now add custom styles */
 @layer utilities {
   @keyframes scroll {

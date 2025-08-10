@@ -21,8 +21,8 @@ export default function Projects() {
            <SectionHeading>My Projects</SectionHeading>
            </motion.div>
               
-        <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 md:grid-cols-2 
-            gap-10 relative z-10 items-center justify-center '>
+        <div className='grid grid-cols-1 mt-20 sm:grid-cols-2 lg:grid-cols-3 md:grid-cols-2 
+            gap-12 relative z-10 items-center justify-center '>
             {projectData.map((project, i)=>{
                 return <motion.div 
                   
