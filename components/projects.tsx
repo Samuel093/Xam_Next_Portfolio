@@ -36,7 +36,7 @@ export default function Projects() {
                  key={project.id}  className='group relative sm:py-20 '>
                     <PinContainer>
                       <div className='relative flex items-center justify-center
-                       sm:w-80 w-[60vw] overflow-hidden h-[20vh] lg:h-[30vh] mb-10'>
+                       sm:w-80 w-[60vw] overflow-hidden h-[20vh] lg:h-[30vh] mb-15'>
                         <div className='relative w-full h-full overflow-hidden lg:rounded-3xl #151030'
                          style={{ backgroundColor: "#151030" }}>
                            
