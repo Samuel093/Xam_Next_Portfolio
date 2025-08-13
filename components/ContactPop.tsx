@@ -2,9 +2,35 @@
 
 import { useUI } from '@/hooks/context/UIContext';
 import { useEffect, useRef, useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { XMarkIcon } from '@heroicons/react/16/solid';
 import emailjs from '@emailjs/browser';
+
+// Spinner component for loading state
+function Spinner() {
+  return (
+    <svg
+      className="animate-spin h-5 w-5 text-white"
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+    >
+      <circle
+        className="opacity-25"
+        cx="12"
+        cy="12"
+        r="10"
+        stroke="currentColor"
+        strokeWidth="4"
+      />
+      <path
+        className="opacity-75"
+        fill="currentColor"
+        d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+      />
+    </svg>
+  );
+}
 
 export default function ContactPopup() {
   const { showContactPopup, closeContactPopup } = useUI();
@@ -33,51 +59,48 @@ export default function ContactPopup() {
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-  e.preventDefault();
-  setLoading(true);
-  setStatus('idle');
+    e.preventDefault();
+    setLoading(true);
+    setStatus('idle');
 
-  const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
-  const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
-  const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
+    const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
+    const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
+    const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
 
-  console.log('Env:', { serviceId, templateId, publicKey });
+    if (!serviceId || !templateId || !publicKey) {
+      console.error('Missing EmailJS environment variables');
+      setStatus('error');
+      setLoading(false);
+      return;
+    }
 
-  if (!serviceId || !templateId || !publicKey) {
-    console.error('Missing EmailJS environment variables');
-    setStatus('error');
-    setLoading(false);
-    return;
-  }
+    try {
+      await emailjs.send(
+        serviceId,
+        templateId,
+        {
+          from_name: form.user_name,
+          from_email: form.user_email,
+          message: form.message,
+        },
+        publicKey
+      );
 
-  try {
-    await emailjs.send(
-      serviceId,
-      templateId,
-      {
-        user_name: form.user_name,
-        user_email: form.user_email,
-        message: form.message,
-      },
-      publicKey
-    );
+      setStatus('success');
+      setForm({ user_name: '', user_email: '', message: '' });
+      formRef.current?.reset();
 
-    setStatus('success');
-    setForm({ user_name: '', user_email: '', message: '' });
-    formRef.current?.reset();
-
-    setTimeout(() => {
-      setStatus('idle');
-      closeContactPopup();
-    }, 2000);
-  } catch (error) {
-    console.error('EmailJS Error:', error);
-    setStatus('error');
-  } finally {
-    setLoading(false);
-  }
-};
-
+      setTimeout(() => {
+        setStatus('idle');
+        closeContactPopup();
+      }, 2000);
+    } catch (error) {
+      console.error('EmailJS Error:', error);
+      setStatus('error');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
     const onEsc = (e: KeyboardEvent) => {
@@ -138,13 +161,44 @@ export default function ContactPopup() {
             required
           />
 
-          <button
+          <motion.button
             type="submit"
             disabled={loading}
-            className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 disabled:opacity-50"
+            className={`w-full text-white py-2 rounded hover:bg-blue-700 disabled:opacity-50 flex justify-center items-center gap-2 ${
+              loading ? 'bg-blue-600 animate-pulse' : 'bg-blue-600'
+            }`}
+            animate={loading ? { scale: [1, 1.02, 1] } : { scale: 1 }}
+            transition={{
+              repeat: loading ? Infinity : 0,
+              duration: 1.2,
+            }}
           >
-            {loading ? 'Sending...' : 'Send Message'}
-          </button>
+            <AnimatePresence mode="wait" initial={false}>
+              {loading ? (
+                <motion.div
+                  key="loading"
+                  className="flex items-center gap-2"
+                  initial={{ opacity: 0, y: -5 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 5 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <Spinner />
+                  <span>Sending...</span>
+                </motion.div>
+              ) : (
+                <motion.span
+                  key="send"
+                  initial={{ opacity: 0, y: -5 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 5 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  Send Message
+                </motion.span>
+              )}
+            </AnimatePresence>
+          </motion.button>
 
           {status === 'success' && (
             <p className="text-green-600 text-center">
@@ -161,6 +215,7 @@ export default function ContactPopup() {
     </div>
   );
 }
+
 
 
 
