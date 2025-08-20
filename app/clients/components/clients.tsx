@@ -18,7 +18,7 @@ const Clients = () => {
           transition={{ duration: 0.8, delay: 0.5 }}
           className="mb-10"
         >
-          <SectionHeading>What People Say's</SectionHeading>
+          <SectionHeading>Peoples Opinion</SectionHeading>
         </motion.div>
 
         <div className="flex flex-col items-center max-lg:mt-10">
