@@ -1,6 +1,6 @@
 'use client';
 
-import SafeHydrate from '@/components/safeHydrate';
+import SafeHydrate from '@/app/clients/components/safeHydrate';
 import { useCanvas } from '@/hooks/useCanvas';
 import { useCallback, useRef, useEffect, useState } from 'react';
 

@@ -1,11 +1,11 @@
 'use client'
 
 
-import Clients from '@/components/clients';
-import Hero from '@/components/hero';
-import Projects from '@/components/projects';
-import Services from '@/components/Services';
-import Skills from '@/components/Skills';
+import Clients from '@/app/clients/components/clients';
+import Hero from '@/app/clients/components/hero';
+import Projects from '@/app/clients/components/projects';
+import Services from '@/app/clients/components/Services';
+import Skills from '@/app/clients/components/Skills';
 import AOS from 'aos';
 import 'aos/dist/aos.css'; // You can also use <link> for styles
 import { useEffect } from 'react';
@@ -25,6 +25,6 @@ export default function Home() {
       <Skills/>
       <Projects/>
       <Clients/>
-                 </main>
+       </main>
   );
 }

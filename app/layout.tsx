@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/footer";
-import ScrollToTop from "../components/Helper/ScrollToTop";
-import ContactPop from "@/components/ContactPop";
+import Navbar from "@/app/clients/components/Navbar";
+import Footer from "@/app/clients/components/footer";
+import ScrollToTop from "./clients/components/Helper/ScrollToTop";
+import ContactPop from "@/app/clients/components/ContactPop";
 import { UIProvider } from "@/hooks/context/UIContext";
 
 
